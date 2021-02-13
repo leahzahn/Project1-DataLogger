@@ -23,6 +23,11 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    private void OnApplicationQuit()
+    {
+        WriteFile("Application quit at " + DateTime.Now);
+    }
+
     public void Click()
     {
         WriteFile("Button clicked at " + DateTime.Now);
