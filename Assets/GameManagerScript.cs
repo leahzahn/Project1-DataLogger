@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -10,15 +11,23 @@ public class GameManagerScript : MonoBehaviour
     void Start()
     {
         CreateFile();
-        WriteFile("Application startup");
+        WriteFile("Application startup at " + DateTime.Now);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown("space"))
+        {
+            WriteFile("Space key pressed at " + DateTime.Now);
+        }
     }
 
+    public void Click()
+    {
+        WriteFile("Button clicked at " + DateTime.Now);
+    }
+     
     private void CreateFile()
     {
         if (!File.Exists(filepath))
@@ -29,10 +38,11 @@ public class GameManagerScript : MonoBehaviour
 
     private void WriteFile(string text)
     {
-        using (StreamWriter writer = new StreamWriter(filepath))
+        using (StreamWriter writer = new StreamWriter(filepath, true))
         {
             writer.WriteLine(text);
         }
     }
 
+    
 }
